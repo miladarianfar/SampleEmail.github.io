@@ -1,0 +1,72 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      
+      <h:head>
+        <title>Welcome Page - Send Email</title>
+        <h:outputStylesheet library="css" name="welcome.css"/>
+      </h:head>
+      
+      <h:body>
+      	
+      	<h:form>
+      	
+      	<ul class="topmenu">
+		  <li><h:commandLink value="Home" action="welcome.xhtml" class="active"/></li>
+		  <li><h:commandLink value="Sent Mail" action="#{mailController.getMails(myUser)}"/></li>
+		  <li><h:commandLink value="Received Mail" action="#{mailController.getReceivedMails(myUser)}"/></li>
+		  <li class="user" style="float: right"><h:outputText value="#{myUser.email}"/></li>
+		  <li><h:commandLink value="Logout" action="#{loginController.logout}"/></li>
+		</ul>
+      	
+
+			<div class="clearfix">
+				  <div class="column sidemenu">
+				    <ul>
+				      <li><a href="#home" class="active">Home</a></li>
+					  <li><h:commandLink value="Sent Mail" action="#{mailController.getMails(myUser)}"/></li>
+					  <li><h:commandLink value="Received Mail" action="#{mailController.getReceivedMails(myUser)}"/></li>
+					  <li><h:commandLink value="Logout" action="#{loginController.logout}"/></li>
+				    </ul>
+				  </div>
+				
+				  <div class="column content">
+				    <div class="header">
+				      <h1>Send Mail Form</h1>
+				    </div>
+				    <div class="myForm">
+					   <h:panelGrid columns="2">
+							<h:outputLabel class="formContent" style="color :#2196F3">Choose User  </h:outputLabel>
+							<h:selectOneMenu value="#{user.email}" class="formContent input">
+								
+								<f:selectItems value="#{mailController.users}" var="u" itemLabel="#{u.email}" itemValue="#{u.email}"/>
+				
+							</h:selectOneMenu>
+							
+							<h:outputLabel value="Subject " class="formContent" style="color :#2196F3"/>
+							<h:inputText value="#{mail.subject}" class="formContent input"/>
+							
+							<h:outputLabel value="Text " class="formContent" style="color :#2196F3"/>
+							<h:inputTextarea value="#{mail.text}" class="formContent input"/>
+							
+							<h:outputLabel value=" "/>
+							<h:commandButton value="Send" action="#{mailController.sendMail(myUser, user, mail)}" class="btn"/>
+							
+						</h:panelGrid>
+				    </div>
+				  </div>
+			</div>
+				
+				<div class="footer">
+				  <p>@milad arianfar  JSF 2.3</p>
+				</div>
+
+		</h:form>
+      	
+      </h:body>
+      
+</html>
